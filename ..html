@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Birthday Card</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: radial-gradient(circle, #ffe6e6, #ffcccc, #ff9999);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      width: 450px;
+      padding: 30px;
+      border-radius: 25px;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      position: relative;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeInUp 1s ease-out forwards;
+    }
+
+    .card h1 {
+      font-size: 3rem;
+      color: #ff6583;
+      margin-bottom: 25px;
+    }
+
+    .card p {
+      font-size: 1.6rem;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .card button {
+      padding: 30px 30px;
+      background: linear-gradient(135deg, #ff7eb3, #ff6583);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: transform 0.2s ease;
+    }
+
+    .card button:hover {
+      transform: scale(1.1);
+    }
+
+    .image {
+      position: absolute;
+      animation: float 3s ease-in-out infinite;
+      pointer-events: none;
+      border-radius: 50%; /* Make the image circular */
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      color: #ff6583;
+      text-align: center;
+      display: none;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-200px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🎉 Happy Birthday Chaitra!</h1>
+    <p>May your day be filled with love, laughter, and endless fun!</p>
+    <button id="celebrate-button" onclick="celebrate()">Celebrate Now 🎂</button>
+    <div id="birthday-message" class="message">
+      <h2 id="message-text">🎉 Wishing you a wonderful year ahead! 🎂</h2>
+    </div>
+  </div>
+
+  <script>
+    // Array of different birthday messages
+    const birthdayMessages = [
+      "🎉 Wishing you a wonderful year ahead! 🎂",
+      "🎈 Here's to another year of awesome adventures! 🎉",
+      "🎁 May your day be filled with all the things you love! 💖",      
+      "🎊 Hope your birthday is as amazing as you are! 🎉",      
+      "🎂 A year older, a year bolder! Have a fabulous birthday! 💫",
+      "🎁 May all your dreams come true this year! 🌟",
+      "🎈 Cheers to another fabulous year ahead! 🎉"      
+    ];
+
+    // Array of different button labels
+    const buttonLabels = [
+      "Let's Party 🎉",
+      "Spread the Joy 🎂",
+      "Unleash the Fun 🎈",      
+      "Start the Celebration 🎊",
+      "Time to Cheer 🎆",      
+      "Celebrate in Style 🎁"
+    ];
+
+    // Set a random button label on page load or reload
+    document.getElementById('celebrate-button').textContent = buttonLabels[Math.floor(Math.random() * buttonLabels.length)];
+
+    function celebrate() {
+      for (let i = 0; i < 10; i++) { // 10 images for variety
+        createImage();
+      }
+
+      // Display a random birthday message
+      document.getElementById('birthday-message').style.display = 'block';
+      document.getElementById('message-text').textContent = birthdayMessages[Math.floor(Math.random() * birthdayMessages.length)];
+
+      // Change the button label after clicking
+      document.getElementById('celebrate-button').textContent = buttonLabels[Math.floor(Math.random() * buttonLabels.length)];
+    }
+
+    function createImage() {
+      const img = document.createElement('img');
+      
+      // Randomly select between the two image URLs
+      const imageUrls = [
+        'https://i.postimg.cc/pT9t8M1g/Media.jpg', // Original image URL
+        'https://i.postimg.cc/XYQpfhWn/Media-1.jpg' // New image URL
+      ];
+      
+      img.src = imageUrls[Math.floor(Math.random() * imageUrls.length)];
+      img.className = 'image';
+      img.style.left = `${Math.random() * window.innerWidth}px`;
+      img.style.top = `${Math.random() * window.innerHeight}px`;
+      img.style.width = `${Math.random() * 100 + 50}px`; // Random size for variety
+      img.style.animationDuration = `${Math.random() * 3 + 2}s`;
+      document.body.appendChild(img);
+
+      setTimeout(() => {
+        img.remove();
+      }, 3000); // Remove image after animation
+    }
+  </script>
+</body>
+</html>
